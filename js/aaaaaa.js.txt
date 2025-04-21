@@ -1,0 +1,22 @@
+const texts = ["Hello there!", "Welcome to the Club!", "Enjoy your stay!"]; // Array of texts to display
+let textIndex = 0;
+const textElement = document.getElementById('textAnimation');
+
+function animateText() {
+  // Set up typing and deleting animation
+  textElement.innerText = texts[textIndex]; // Start typing the new text
+  
+  // Move to the next text in the array
+  textIndex = (textIndex + 1) % texts.length; // Cycle through the texts
+  
+  // Reset the animation by removing and adding the class to trigger the animation
+  textElement.classList.remove('text-animation');
+  void textElement.offsetWidth; // Trigger reflow to restart the animation
+  textElement.classList.add('text-animation');
+  
+  // Loop the animation
+  setTimeout(animateText, 9000); // 9s to allow typing, deleting, and switching
+}
+
+// Start the animation when the page is loaded
+window.onload = animateText;
