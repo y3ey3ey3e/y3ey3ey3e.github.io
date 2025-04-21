@@ -12,7 +12,7 @@
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="stylesheet" href="css/landing.css" />
-  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/disable-devtool@latest" disable-devtool-auto></script>
   <script src="js/disablecacat.js"></script>
   <style>
     @font-face {
@@ -23,7 +23,9 @@
     * {
       font-family: custom-font;
       cursor: url(https://files.catbox.moe/sxdaup.cur) 16 16, auto !important;
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     :root {
@@ -36,17 +38,19 @@
     }
 
     .custom-text {
-    font-size: 15px; /* Adjust the font size as needed */
-    color: rgb(0, 0, 0); /* Black color */
-    text-shadow: 0 0 10px black, 0 0 20px black, 0 0 30px black; /* Glowing black shadow */
-    margin-top: 25px; /* Adjust the space from the name */
+      font-size: 15px;
+      color: #000;
+      text-shadow: 0 0 10px black, 0 0 20px black, 0 0 30px black;
+      margin-top: 25px;
+      text-align: center;
     }
-
 
     video#bg-video {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: -1;
       filter: blur(3px);
@@ -54,9 +58,11 @@
 
     .overlay {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgb(0, 0, 0);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -78,8 +84,10 @@
 
     .blurred {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       backdrop-filter: blur(10px);
       z-index: 1;
       opacity: 0;
@@ -97,8 +105,10 @@
 
     .clear-window {
       position: absolute;
-      top: 50%; left: 50%;
-      width: 600px; height: 400px;
+      top: 50%;
+      left: 50%;
+      width: 600px;
+      height: 400px;
       transform: translate(-50%, -50%) translateY(-100%);
       z-index: 2;
       pointer-events: none;
@@ -117,6 +127,7 @@
     .clear-window.show {
       opacity: 1;
       transform: translate(-50%, -50%) translateY(0);
+      pointer-events: all;
     }
 
     .avatar {
@@ -124,12 +135,12 @@
       height: var(--avatar-size);
       border-radius: 30%;
       object-fit: cover;
-      box-shadow: 0 0 15px rgb(0, 0, 0);
+      box-shadow: 0 0 15px black;
     }
 
     .name {
       font-size: 24px;
-      color: rgb(0, 0, 0);
+      color: #000;
       margin-top: 13px;
       font-weight: 500;
       letter-spacing: 1px;
@@ -137,40 +148,37 @@
     }
 
     .role-icon {
-     margin-top: 30px;
+      margin-top: 30px;
     }
-
 
   </style>
 </head>
 <body>
 
-  <video id="bg-video" autoplay loop muted playsinline webkit-playsinline>
-    <source src="media/abcd.mp4" type="video/mp4">
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="media/abcd.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
   </video>
-  
 
   <div id="overlay" class="overlay">
     <span id="clickText">>_<</span>
   </div>
 
-<img id="bg-image" src="media/wowww.png" alt="Background Image">
+  <audio id="music" class="hidden-video">
+    <source src="media/abcd.mp4" type="audio/mp4" />
+    Your browser does not support the audio element.
+  </audio>
 
-
-  <div id="overlay" class="overlay">
-    <span id="clickText">>_<</span>
-  </div>
-
+  <div id="blurEffect" class="blurred"></div>
 
   <div class="clear-window">
-    <img src="images/hapcu.png" alt="Avatar" class="avatar">
+    <img src="images/hapcu.png" alt="Avatar" class="avatar" />
     <div class="name">andy</div>
-
     <div class="custom-text">
-        wish you were here<br>
-        but nothings free
+      wish you were here<br />
+      but nothings free
     </div>
-    
+
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 10px; gap: 5px;">
       <div class="role-icon helper">
         <svg xmlns="http://www.w3.org/2000/svg" style="color: #000000; filter: drop-shadow(0 0 2.5px #000000); vertical-align: -1px; margin: 0 3px;" width="27" height="27" fill="currentColor" class="bi bi-feather" viewBox="0 0 16 16">
