@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>simswap.club</title>
+  <meta property="og:title" content="simswap.club" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://simswap.club" />
+  <meta property="og:description" content="Sim Swap Club" />
+  <meta name="theme-color" content="#99999" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest" type="text/javascript"></script>
+  <script src="js/fontawsomepro.js"></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/disablecacat.js"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <style>
+    html, body {
+      overflow: hidden; margin: 0; padding: 0; height: 100%; width: 100%;
+    }
+
+    .prompt {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; text-align: center; cursor: pointer;
+      z-index: 10; opacity: 1; transition: opacity 1s ease-in-out;
+    }
+
+    .video-container {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: none; z-index: 1; opacity: 0; transition: opacity 1s ease-in-out;
+    }
+
+    .video-container.show {
+      display: block; opacity: 1;
+    }
+
+    video {
+      width: 100%; height: 100%; object-fit: cover; filter: blur(8px); z-index: 0;
+    }
+
+    .links {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: none; z-index: 10; opacity: 0;
+      animation: pop 0.5s forwards;
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .name {
+      position: absolute;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.5rem;
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .name:hover {
+      color: #ffffff;
+      text-shadow: 0 0 8px #ffffff, 0 0 16px #ffffff;
+    }
+
+    /* Preserve individual transforms + scale */
+    .kyps:hover {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .heroin:hover {
+      transform: translate(-50%, 50%) scale(1.2);
+    }
+
+    .andy:hover {
+      transform: translate(50%, 50%) scale(1.2);
+    }
+
+    .kyps {
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .heroin {
+      bottom: 40%;
+      left: 35%;
+      transform: translate(-50%, 50%);
+    }
+
+    .andy {
+      bottom: 40%;
+      right: 35%;
+      transform: translate(50%, 50%);
+    }
+
+    /* Responsive fix for mobile to space links vertically */
+    @media (max-width: 600px) {
+      .heroin {
+        bottom: 35%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+      }
+
+      .andy {
+        bottom: 25%;
+        right: 50%;
+        transform: translate(50%, 50%);
+      }
+
+      .kyps {
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="prompt" id="prompt">click</div>
+
+  <div class="links" id="links">
+    <a href="https://simswap.club/kyps" class="name kyps">kyps</a>
+    <a href="https://simswap.club/rrx" class="name heroin">heroin</a>
+    <a href="https://simswap.club/rrx" class="name andy">andy</a>
+  </div>
+
+  <div class="video-container" id="video-container">
+    <video id="video" playsinline loop>
+      <source src="aaa/aaa.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <script>
+    document.getElementById('prompt').addEventListener('click', function () {
+      this.classList.add('fade-out');
+      setTimeout(() => {
+        this.style.display = 'none';
+        document.getElementById('video-container').classList.add('show');
+        const links = document.getElementById('links');
+        links.style.display = 'block';
+        links.style.opacity = '1';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
