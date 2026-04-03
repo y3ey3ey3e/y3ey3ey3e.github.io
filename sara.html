@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARA //</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest" type="text/javascript"></script>
+    <script src="js/disablecacat.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ff0000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff0000;
+        }
+
+        /* Section Title */
+        .section-title {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: "///";
+            color: #ff0000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+        }
+
+        /* Grid */
+        .grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* Cards */
+        .card {
+            background: #111111;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: #ff0000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #0f0f0f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            display: block;
+        }
+
+        .card:hover .card-image img {
+            opacity: 1;
+        }
+
+        /* Placeholder when no image */
+        .card-image .placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff0000;
+            color: #000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title::before {
+            content: "✦";
+            color: #ff0000;
+            font-size: 0.8rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #1a1a1a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Footer */
+        .footer {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #333;
+        }
+
+        /* Background grid effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 0, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container {
+            background: #0a0a0a;
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 1000px;
+            height: 85vh;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 60px rgba(255, 0, 0, 0.4);
+            position: relative;
+        }
+
+        /* Terminal Header */
+        .terminal-header {
+            background: #111;
+            border-bottom: 2px solid #ff0000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px 6px 0 0;
+            flex-shrink: 0;
+        }
+
+        .terminal-title {
+            color: #ff0000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .terminal-status {
+            color: #666;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .terminal-status span {
+            color: #00ff41;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Close Button */
+        .close-btn {
+            background: transparent;
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            padding: 8px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .close-btn:hover {
+            background: #ff0000;
+            color: #000;
+        }
+
+        /* Terminal Body */
+        .terminal-body {
+            flex: 1;
+            padding: 25px 30px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #00ff41;
+            background: #0a0a0a;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .terminal-line {
+            margin-bottom: 2px;
+            opacity: 0;
+            animation: fadeIn 0.03s forwards;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .prompt {
+            color: #ff0000;
+        }
+
+        .command {
+            color: #fff;
+        }
+
+        .output {
+            color: #00ff41;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+
+        .warning {
+            color: #ffaa00;
+        }
+
+        .system {
+            color: #888;
+            font-style: italic;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background: #00ff41;
+            animation: blink 0.8s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Loading state */
+        .loading {
+            color: #ff0000;
+            font-style: italic;
+            animation: pulse 1s infinite;
+        }
+
+        /* Scrollbar */
+        .terminal-body::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: #0a0a0a;
+            border-left: 1px solid #1a1a1a;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border-radius: 0;
+            border: 2px solid #0a0a0a;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb:hover {
+            background: #ff3333;
+        }
+
+        .terminal-body {
+            scrollbar-width: 12px;
+            scrollbar-color: #ff0000 #0a0a0a;
+        }
+
+        /* Scanline effect */
+        .modal-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+            border-radius: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .modal-container {
+                height: 90vh;
+                max-height: none;
+            }
+            .terminal-body {
+                font-size: 0.8rem;
+                padding: 15px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">SARA<span>.KYPS</span></div>
+        <nav class="nav-links">
+            <a href="#">Archives</a>
+        </nav>
+    </header>
+
+    <h2 class="section-title">Recent Entries</h2>
+
+    <div class="grid" id="blogGrid">
+        <!-- Cards will be generated by JavaScript -->
+    </div>
+
+    <footer class="footer">
+        SARA.LOGS // CLASSIFIED // UNAUTHORIZED ACCESS IS A FEDERAL CRIME
+    </footer>
+
+    <!-- TERMINAL MODAL -->
+    <div class="modal-overlay" id="terminalModal">
+        <div class="modal-container">
+            <div class="terminal-header">
+                <div class="terminal-title">/// SECURE TERMINAL v2.4.1</div>
+                <div style="display:flex;align-items:center;gap:15px;">
+                    <div class="terminal-status">CONNECTION: <span>●</span> LIVE</div>
+                    <button class="close-btn" onclick="closeTerminal()">[ CLOSE ]</button>
+                </div>
+            </div>
+            <div class="terminal-body" id="terminal">
+                <div class="loading">>> ESTABLISHING SECURE CONNECTION...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURE YOUR BLOG IMAGES HERE
+        // Just type the filename for each blog
+        // Leave empty "" for placeholder
+        // ==========================================
+        const blogImages = [
+            "blog1.jpg",    // First blog image
+            "blog2.jpg",    // Second blog image  
+            "blog.jpg",    // Third blog image
+            "blog4.jpg",    // Fourth blog image
+            "blog5.jpg",    // Fifth blog image
+            "blog6.jpg"     // Sixth blog image
+        ];
+
+       const blogTexts = [
+            "dox.txt",
+            "data.txt",
+            "blog3.txt",
+            "blog4.txt",
+            "blog5.txt",
+            "blog6.txt"
+        ];
+    
+        // Blog data
+        const blogs = [
+            {
+                badge: "CLASSIFIED",
+                title: "Dox",
+                desc: "First contact established.",
+                date: "2026-04-02",
+                log: "LOG_001",
+                placeholder: "[NO SIGNAL]"
+            },
+            {
+                badge: "URGENT",
+                title: "Data Extraction",
+                desc: "Whats your lure? ",
+                date: "2026-04-02",
+                log: "LOG_002",
+                placeholder: "[ENCRYPTED]"
+            },
+            {
+                badge: "SOON",
+                title: "",
+                desc: "soon",
+                date: "2026-04-02",
+                log: "LOG_003",
+                placeholder: "[REDACTED]"
+            },
+            {
+                badge: "DELETED",
+                title: "",
+                desc: "",
+                date: "2026-04-02",
+                log: "LOG_004",
+                placeholder: "[ARCHIVED]"
+            },
+            {
+                badge: "DELETED",
+                title: "",
+                desc: "",
+                date: "2026-04-02",
+                log: "LOG_005",
+                placeholder: "[PURGED]"
+            },
+            {
+                badge: "DELETED",
+                title: "",
+                desc: "",
+                date: "2026-04-02",
+                log: "LOG_000",
+                placeholder: "[GHOST]"
+            }
+        ];
+
+        // Generate cards
+        function generateCards() {
+            const grid = document.getElementById('blogGrid');
+            grid.innerHTML = '';
+
+            blogs.forEach((blog, index) => {
+                const imageFile = blogImages[index] || "";
+                const hasImage = imageFile.trim() !== "";
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => openTerminal(index);
+
+                card.innerHTML = `
+                    <div class="card-image">
+                        ${hasImage 
+                            ? `<img src="${imageFile}" alt="${blog.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+                            : ''
+                        }
+                        <div class="placeholder" style="${hasImage ? 'display:none;' : 'display:flex;'}">${blog.placeholder}</div>
+                        <span class="card-badge">${blog.badge}</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${blog.title}</h3>
+                        <p class="card-desc">${blog.desc}</p>
+                        <div class="card-meta">
+                            <span>${blog.date}</span>
+                            <span>${blog.log}</span>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize cards on load
+        generateCards();
+
+        // Terminal functions
+        let typingInterval;
+        let currentLine = 0;
+        let isTyping = false;
+
+        function getLineClass(line) {
+            if (line.includes('>>')) return 'system';
+            if (line.includes('ERROR') || line.includes('FAIL')) return 'error';
+            if (line.includes('WARNING') || line.includes('ALERT')) return 'warning';
+            if (line.includes('[') && line.includes(']')) return 'command';
+            if (line.includes('---')) return 'system';
+            return 'output';
+        }
+
+        function typeLine(lines) {
+            const terminal = document.getElementById('terminal');
+
+            if (currentLine < lines.length) {
+                const line = lines[currentLine];
+                const div = document.createElement('div');
+                div.className = `terminal-line ${getLineClass(line)}`;
+                div.style.animationDelay = '0s';
+
+                if (line === '') {
+                    div.innerHTML = '&nbsp;';
+                } else {
+                    div.textContent = line;
+                }
+
+                terminal.appendChild(div);
+                terminal.scrollTop = terminal.scrollHeight;
+                currentLine++;
+
+                const delay = lines.length > 50 ? 5 : 15;
+                typingInterval = setTimeout(() => typeLine(lines), delay);
+            } else {
+                const cursorDiv = document.createElement('div');
+                cursorDiv.className = 'terminal-line';
+                cursorDiv.style.marginTop = '10px';
+                cursorDiv.innerHTML = '<span class="prompt">root@csinking:~$</span><span class="cursor"></span>';
+                terminal.appendChild(cursorDiv);
+                terminal.scrollTop = terminal.scrollHeight;
+                isTyping = false;
+            }
+        }
+
+            async function fetchBlogFile(index) {
+                try {
+                    const fileName = blogTexts[index];
+                    const response = await fetch(fileName);
+
+                    if (!response.ok) throw new Error('FILE NOT FOUND');
+
+                    return await response.text();
+                } catch (error) {
+                    return `[ERROR] ${error.message}
+
+            >> UNABLE TO LOAD BIN FILE
+            >> CHECK FILE PATH OR NAME
+
+            [STANDBY]`;
+                }
+            }
+
+        async function openTerminal(index) {
+            const modal = document.getElementById('terminalModal');
+            const terminal = document.getElementById('terminal');
+
+            terminal.innerHTML = '<div class="loading">>> ESTABLISHING SECURE CONNECTION...</div>';
+            currentLine = 0;
+            clearTimeout(typingInterval);
+            isTyping = true;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            const content = await fetchBlogFile(index);
+            terminal.innerHTML = '';
+
+            const date = new Date().toISOString().split('T')[0];
+            const headerLines = [
+                `[DX-ARCHIVE-${date}]`,
+                'CLASSIFICATION: LEVEL 5 CLEARANCE REQUIRED',
+                '',
+                '>> INITIATING DECRYPTION SEQUENCE...',
+                '>> BYPASSING SECURITY PROTOCOLS...',
+                '>> ACCESS GRANTED.',
+                '',
+                '---',
+                ''
+            ];
+
+            const contentLines = content.split(/\r\n|\n|\r/);
+            const footerLines = ['', '---', '', '>> ARCHIVE SEALED', '>> SESSION TERMINATED', '>> END OF TRANSMISSION'];
+            const allLines = [...headerLines, ...contentLines, ...footerLines];
+
+            typeLine(allLines);
+        }
+
+        function closeTerminal() {
+            const modal = document.getElementById('terminalModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            clearTimeout(typingInterval);
+            isTyping = false;
+        }
+
+        document.getElementById('terminalModal').addEventListener('click', function(e) {
+            if (e.target === this) closeTerminal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeTerminal();
+            if (e.key === 'q' && !isTyping && document.getElementById('terminalModal').classList.contains('active')) {
+                closeTerminal();
+            }
+        });
+    </script>
+</body>
+</html>
